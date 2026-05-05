@@ -1,0 +1,10 @@
+## Local environments
+venv/
+.venv/
+
+## Local data / artifacts
+data/
+
+## Project-specific (local)
+Rico/
+
