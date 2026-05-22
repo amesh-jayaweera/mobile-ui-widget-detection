@@ -14,9 +14,19 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 
+# def _class_color(name: str) -> tuple[int, int, int]:
+#     h = hashlib.sha256(name.encode()).digest()
+#     return (h[0], h[1], h[2])
+
 def _class_color(name: str) -> tuple[int, int, int]:
     h = hashlib.sha256(name.encode()).digest()
-    return (h[0], h[1], h[2])
+
+    # Dark-ish colors (30-150)
+    return (
+        30 + h[0] % 120,
+        30 + h[1] % 120,
+        30 + h[2] % 120,
+    )
 
 
 def _find_image(jpeg_dir: Path, stem: str) -> Path:
@@ -88,7 +98,7 @@ def main() -> int:
     objs = parse_voc_objects(ann)
     im = Image.open(img_path).convert("RGB")
     draw = ImageDraw.Draw(im)
-    font = _load_font(14)
+    font = _load_font(20)
 
     for name, xmin, ymin, xmax, ymax in objs:
         color = _class_color(name)
